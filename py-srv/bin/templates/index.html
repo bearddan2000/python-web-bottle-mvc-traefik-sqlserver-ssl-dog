@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Python Bottle MVC Example</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="#">Python Bottle</a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                  <li class="active"><a href="/">Index</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <div class="container">
+    <div class="row" style="margin-top:20px">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+
+        <h2>Dog Table</h2>
+        <table id="dataTable" class="display">
+          <!-- Header Table -->
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Color</th>
+            </tr>
+          </thead>
+          <!-- Footer Table -->
+          <tfoot>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Color</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready( function () {
+      $.ajax({
+        url: "/pop",
+        'headers': { 'Accept': 'application/json;odata=nometadata' },
+  		success: function (data) {
+  			data = data;
+  			var table = $('#dataTable').DataTable();
+  			table.rows.add( data.results ).draw();
+  		}
+  	});
+
+  	 var table = $('#dataTable').DataTable({
+  			"columns": [
+  			    { "data": "id"},
+  		      { "data": "name" },
+  				  { "data": "color" }
+  			]
+  	 })
+  });
+
+</script>
+</<body>
